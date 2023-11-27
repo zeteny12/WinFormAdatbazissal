@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Crypto;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace WinFormAdatbazissal
 {
@@ -26,6 +27,16 @@ namespace WinFormAdatbazissal
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //Színek beállítása -- Műveletek
+            groupBox_Muveletek.BackColor = Color.Red;
+            button_Letrehoz.BackColor = Color.FromArgb(200, 0, 0);
+            button_Modosit.BackColor = Color.FromArgb(200, 0, 0);
+            button_Torles.BackColor = Color.FromArgb(200, 0, 0);
+            //Színek beállítása -- Kiválasztott tag
+            groupBox_KivalasztottTag.BackColor = Color.FromArgb(255, 218, 155);
+            //Színek beállítása -- Tagok
+            listBox_Tagok.BackColor = Color.FromArgb(255, 240, 245);
+
             //Kapcsolat kialakítása
             MySqlConnectionStringBuilder sb = new MySqlConnectionStringBuilder();
             sb.Clear();
@@ -77,6 +88,7 @@ namespace WinFormAdatbazissal
 
         private void listBox_Tagok_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //Megnézzük, hogy melyik ügyfél van kiválasztva
             if (listBox_Tagok.SelectedIndex < 0)
             {
                 return;     //Befejezés
@@ -107,7 +119,7 @@ namespace WinFormAdatbazissal
             decimal irszam = numericUpDown_Iranyitoszam.Value;
             string orsz = textBox_Orszagkod.Text;
 
-            //Létrehozás utasítás
+            //Létrehozás SQL parancs
             command.CommandText = "INSERT INTO `ugyfel`(`azon`, `nev`, `szulev`, `irszam`, `orsz`) VALUES (NULL, @nev, @szulev, @irszam, @orsz)"; //'@' - jelezzük a programnak, hogy később küldjük az értékét
             command.Parameters.Clear(); //Ha esetleg valami benne maradt volna, akkor tisztítunk
             command.Parameters.AddWithValue("@nev", nev);
@@ -133,12 +145,94 @@ namespace WinFormAdatbazissal
             numericUpDown_SzuletesiEv.Value = numericUpDown_SzuletesiEv.Minimum;
             textBox_Orszagkod.Text = "";
 
+            //Módosítás után az adatok újratöltése a ListBox-ba
             TagokBetoltese();
         }
 
         private void button_Modosit_Click(object sender, EventArgs e)
         {
+            //Megnézzük, hogy melyik ügyfél van kiválasztva
+            if (listBox_Tagok.SelectedIndex < 0)
+            {
+                MessageBox.Show("Nincs elem kiválasztva!");
+                return;
+            }
 
+            Tag kivalaszottTag = listBox_Tagok.SelectedItem as Tag;     //'as Tag' -- objektummá alakítás
+
+            //Módosítás előtt azonosító és új értékek lekérése
+            int azonosito = kivalaszottTag.azon;
+            string ujNev = textBox_Nev.Text;
+            decimal ujSzulev = numericUpDown_SzuletesiEv.Value;
+            decimal ujIrszam = numericUpDown_Iranyitoszam.Value;
+            string ujOrszag = textBox_Orszagkod.Text;
+
+            //Módosítás SQL parancs
+            command.CommandText = "UPDATE `ugyfel` SET `nev`=@nev, `szulev`=@szulev, `irszam`=@irszam, `orsz`=@orsz WHERE `azon`=@azon";
+            command.Parameters.Clear();
+            command.Parameters.AddWithValue("@nev", ujNev);
+            command.Parameters.AddWithValue("@szulev", ujSzulev);
+            command.Parameters.AddWithValue("@irszam", ujIrszam);
+            command.Parameters.AddWithValue("@orsz", ujOrszag);
+            command.Parameters.AddWithValue("@azon", azonosito);
+
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("Sikeres módosítás!");
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            //Módosítás után az adatok újratöltése a ListBox-ba
+            TagokBetoltese();
+        }
+
+        private void button_Torles_Click(object sender, EventArgs e)
+        {
+            //Megnézzük, hogy melyik ügyfél van kiválasztva
+            if (listBox_Tagok.SelectedIndex < 0)
+            {
+                MessageBox.Show("Nincs elem kiválasztva!");
+                return;
+            }
+
+            Tag kivalaszottTag = listBox_Tagok.SelectedItem as Tag;     //'as Tag' -- objektummá alakítás
+
+            //Azonosító lekérése
+            int azonosito = kivalaszottTag.azon;
+
+            //Törlés SQL parancs
+            command.CommandText = "DELETE FROM `ugyfel` WHERE `azon`=@azon";
+            command.Parameters.Clear();
+            command.Parameters.AddWithValue("@azon", azonosito);
+
+            try
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+
+                command.ExecuteNonQuery();
+                MessageBox.Show("Sikeres törlés!");
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+            //Törlés után az adatok újratöltése a ListBox-ba
+            TagokBetoltese();
         }
     }
 }

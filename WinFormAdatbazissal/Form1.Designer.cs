@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.listBox_Tagok = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox_KivalasztottTag = new System.Windows.Forms.GroupBox();
             this.textBox_Orszagkod = new System.Windows.Forms.TextBox();
             this.numericUpDown_SzuletesiEv = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_Iranyitoszam = new System.Windows.Forms.NumericUpDown();
@@ -41,14 +41,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox_Muveletek = new System.Windows.Forms.GroupBox();
             this.button_Torles = new System.Windows.Forms.Button();
             this.button_Modosit = new System.Windows.Forms.Button();
             this.button_Letrehoz = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.groupBox_KivalasztottTag.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SzuletesiEv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Iranyitoszam)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.groupBox_Muveletek.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox_Tagok
@@ -62,25 +62,25 @@
             this.listBox_Tagok.TabIndex = 0;
             this.listBox_Tagok.SelectedIndexChanged += new System.EventHandler(this.listBox_Tagok_SelectedIndexChanged);
             // 
-            // groupBox1
+            // groupBox_KivalasztottTag
             // 
-            this.groupBox1.Controls.Add(this.textBox_Orszagkod);
-            this.groupBox1.Controls.Add(this.numericUpDown_SzuletesiEv);
-            this.groupBox1.Controls.Add(this.numericUpDown_Iranyitoszam);
-            this.groupBox1.Controls.Add(this.textBox_Nev);
-            this.groupBox1.Controls.Add(this.textBox_Azonosito);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(641, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(559, 377);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Kiválasztott tag";
+            this.groupBox_KivalasztottTag.Controls.Add(this.textBox_Orszagkod);
+            this.groupBox_KivalasztottTag.Controls.Add(this.numericUpDown_SzuletesiEv);
+            this.groupBox_KivalasztottTag.Controls.Add(this.numericUpDown_Iranyitoszam);
+            this.groupBox_KivalasztottTag.Controls.Add(this.textBox_Nev);
+            this.groupBox_KivalasztottTag.Controls.Add(this.textBox_Azonosito);
+            this.groupBox_KivalasztottTag.Controls.Add(this.label5);
+            this.groupBox_KivalasztottTag.Controls.Add(this.label4);
+            this.groupBox_KivalasztottTag.Controls.Add(this.label3);
+            this.groupBox_KivalasztottTag.Controls.Add(this.label2);
+            this.groupBox_KivalasztottTag.Controls.Add(this.label1);
+            this.groupBox_KivalasztottTag.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox_KivalasztottTag.Location = new System.Drawing.Point(641, 0);
+            this.groupBox_KivalasztottTag.Name = "groupBox_KivalasztottTag";
+            this.groupBox_KivalasztottTag.Size = new System.Drawing.Size(559, 377);
+            this.groupBox_KivalasztottTag.TabIndex = 1;
+            this.groupBox_KivalasztottTag.TabStop = false;
+            this.groupBox_KivalasztottTag.Text = "Kiválasztott tag";
             // 
             // textBox_Orszagkod
             // 
@@ -200,18 +200,18 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Azonosító:";
             // 
-            // groupBox2
+            // groupBox_Muveletek
             // 
-            this.groupBox2.Controls.Add(this.button_Torles);
-            this.groupBox2.Controls.Add(this.button_Modosit);
-            this.groupBox2.Controls.Add(this.button_Letrehoz);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(641, 377);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 325);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Műveletek";
+            this.groupBox_Muveletek.Controls.Add(this.button_Torles);
+            this.groupBox_Muveletek.Controls.Add(this.button_Modosit);
+            this.groupBox_Muveletek.Controls.Add(this.button_Letrehoz);
+            this.groupBox_Muveletek.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox_Muveletek.Location = new System.Drawing.Point(641, 377);
+            this.groupBox_Muveletek.Name = "groupBox_Muveletek";
+            this.groupBox_Muveletek.Size = new System.Drawing.Size(559, 325);
+            this.groupBox_Muveletek.TabIndex = 2;
+            this.groupBox_Muveletek.TabStop = false;
+            this.groupBox_Muveletek.Text = "Műveletek";
             // 
             // button_Torles
             // 
@@ -221,6 +221,7 @@
             this.button_Torles.TabIndex = 0;
             this.button_Torles.Text = "Törlés";
             this.button_Torles.UseVisualStyleBackColor = true;
+            this.button_Torles.Click += new System.EventHandler(this.button_Torles_Click);
             // 
             // button_Modosit
             // 
@@ -247,8 +248,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1200, 702);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox_Muveletek);
+            this.Controls.Add(this.groupBox_KivalasztottTag);
             this.Controls.Add(this.listBox_Tagok);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -256,11 +257,11 @@
             this.Name = "Form1";
             this.Text = "Tagok nyilvántartása";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBox_KivalasztottTag.ResumeLayout(false);
+            this.groupBox_KivalasztottTag.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_SzuletesiEv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Iranyitoszam)).EndInit();
-            this.groupBox2.ResumeLayout(false);
+            this.groupBox_Muveletek.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -268,7 +269,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBox_Tagok;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox_KivalasztottTag;
         private System.Windows.Forms.TextBox textBox_Azonosito;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpDown_Iranyitoszam;
@@ -279,7 +280,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_SzuletesiEv;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox_Orszagkod;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox_Muveletek;
         private System.Windows.Forms.Button button_Torles;
         private System.Windows.Forms.Button button_Modosit;
         private System.Windows.Forms.Button button_Letrehoz;
